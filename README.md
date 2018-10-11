@@ -1,17 +1,20 @@
 # node-server
 
-#1.调用模块
+# 1.调用模块
+
     var http = require('http')
     var fs = require('fs')
     var path = require('path')
     var url = require('url')
 
-#2.创建服务器
+# 2.创建服务器
+
     var server = http.createServer(function(req,res) {
       routePath(req,res)
     })
 
-#3.服务器接收到请求后的处理
+# 3.服务器接收到请求后的处理
+
     function routePath(req,res) {
       var pathObj = url.parse(req.url,true)
       var handleFn = routes[pathObj.pathname]
@@ -31,7 +34,8 @@
       }
     }
 
-#3.处理POST请求中的参数
+# 4.处理POST请求中的参数
+
     function parseBody(body) {
       var obj = {}
       body.split('&').forEach(function(ele){
@@ -40,7 +44,7 @@
       return obj
     }
 
-#4.路由及其对应的处理
+# 5.路由及其对应的处理
 
     var routes = {
       '/login': function(req,res) {
@@ -65,7 +69,7 @@
       }
     }
 
-#4.没有路由时，静态目录的处理
+# 6.没有路由时，静态目录的处理
 
     function staticRoot(staticPath,req,res) {
       var pathObj = url.parse(req.url,true)
@@ -81,5 +85,5 @@
       })
     }
 
-#5.监听端口
+# 7.监听端口
     server.listen(8090)
